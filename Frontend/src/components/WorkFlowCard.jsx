@@ -9,8 +9,9 @@ import DraggableItem from "./DraggableItem";
 import "../styles/workFlowCard.css";
 
 function WorkFlowCard({ titleName, image }) {
-  const { hasToken, backendApiUrl, userId } = useContext(UserContext);
-
+  const { users, setUsers, hasToken, backendApiUrl, userId } =
+    useContext(UserContext);
+  // console.log(userId);
   const [items, setItems] = useState([]);
   const [klicked, setKlicked] = useState(false);
   const [text, setText] = useState("");
@@ -28,6 +29,7 @@ function WorkFlowCard({ titleName, image }) {
         { category: titleName },
         { withCredentials: true }
       );
+
       console.log("drag response: ", response.data);
       await getUserByIdHandler();
     } catch (error) {
@@ -59,7 +61,7 @@ function WorkFlowCard({ titleName, image }) {
       );
       console.log("Server response after deleting item:", response.data);
 
-      await getUserByIdHandler();
+      // await getUserByIdHandler();
     } catch (error) {
       console.log(error);
     }
@@ -71,7 +73,10 @@ function WorkFlowCard({ titleName, image }) {
         const resp = await axios.get(`${backendApiUrl}/user/${userId}`, {
           withCredentials: true,
         });
-        setItems(resp.data.items);
+        if (resp) {
+          // console.log("resp.data.items", resp.data.items);
+          setItems(resp.data.items);
+        }
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -116,7 +121,7 @@ function WorkFlowCard({ titleName, image }) {
       }
     };
     fetchData();
-  }, [hasToken, userId]);
+  }, [hasToken, userId, items]);
 
   return (
     <>

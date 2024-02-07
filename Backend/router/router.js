@@ -30,9 +30,9 @@ router.post("/api/signup", validateUser, validateSchema, postSignupController);
 router.post("/api/login", limiter, postLoginController);
 router.post("/api/logout", postLogoutController);
 router.put("/api/update-password", postUpdatePwdController);
-router.get("/api/userinfo", authintcatUser, getUserInfo);
+router.get("/api/userinfo/:userId", authintcatUser, getUserInfo);
 router.get("/api/users", getAllUsers);
-router.get("/api/user/:id", getUserById);
+router.get("/api/user/:id", authintcatUser, getUserById);
 
 //////
 router.post("/api/postitem/:id", postItem);

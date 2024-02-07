@@ -16,7 +16,7 @@ const UserContextProvider = ({ children }) => {
 
         let JWTinfocookie = cookie.get("JWTinfo");
 
-        console.log("JWTinfo cookie", JWTinfocookie);
+        // console.log("JWTinfo cookie", JWTinfocookie);
         if (!JWTinfocookie) return;
 
         JWTinfocookie = JWTinfocookie.replace("j:", "");

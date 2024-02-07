@@ -70,6 +70,7 @@ export const getAllUsers = async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      items: user.items,
     }));
 
     res.json(usersInfo);
