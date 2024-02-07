@@ -1,6 +1,6 @@
-# TODOMASTER-App Backend
+# Workflow-app Backend
 
-Die TODOMASTER-App ist eine Anwendung, die es Benutzern ermöglicht, ihre Aufgaben und Projekte auf eine organisierte Weise zu verwalten, inspiriert von der beliebten Projektmanagement-Plattform Trello.
+Die Workflow-app ist eine Anwendung, die es Benutzern ermöglicht, ihre Aufgaben und Projekte auf eine organisierte Weise zu verwalten, inspiriert von der beliebten Projektmanagement-Plattform Trello.
 
 # Installation
 
@@ -81,9 +81,9 @@ export JWT_SECRET="your_secret_key"
 Falls ein Benutzer nicht gefunden wird, wird eine 404-Antwort mit einer entsprechenden Meldung gesendet.
 Bei internen Serverfehlern wird eine 500-Antwort mit der Meldung "Internal Server Error" gesendet.
 
-# TODOMASTER-App Frontend
+# Workflow-app Frontend
 
-Die TODOMASTER-App Frontend-Anwendung ermöglicht es Benutzern, ihre Aufgaben und Projekte auf eine organisierte Weise zu verwalten. Hier finden Sie eine Anleitung zur Einrichtung und Verwendung des Frontend-Teils der Trello-App.
+Die Workflow-app Frontend-Anwendung ermöglicht es Benutzern, ihre Aufgaben und Projekte auf eine organisierte Weise zu verwalten. Hier finden Sie eine Anleitung zur Einrichtung und Verwendung des Frontend-Teils der Trello-App.
 
 # Installation
 
