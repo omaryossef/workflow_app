@@ -121,7 +121,7 @@ function WorkFlowCard({ titleName, image }) {
       }
     };
     fetchData();
-  }, [hasToken, userId, items]);
+  }, [hasToken, userId]);
 
   return (
     <>

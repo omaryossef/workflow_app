@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 import "dotenv/config";
 
 async function connectMongoose() {
-  const { DB_USER, DB_PASSWORD, CLUSTER, DB_NAME } = process.env;
-  const URI = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${CLUSTER}/${DB_NAME}?retryWrites=true&w=majority`;
+  // const { DB_USER, DB_PASSWORD, CLUSTER, DB_NAME } = process.env;
+  // const URI = `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${CLUSTER}/${DB_NAME}?retryWrites=true&w=majority`;
   try {
-    await mongoose.connect(URI);
+    await mongoose.connect(process.env.DB_URL);
     const collections = (
       await mongoose.connection.db.listCollections().toArray()
     ).map((el) => el.name);
