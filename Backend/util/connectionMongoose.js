@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import "dotenv/config";
+import "dotenv/config.js";
 
 async function connectMongoose() {
   // const { DB_USER, DB_PASSWORD, CLUSTER, DB_NAME } = process.env;
