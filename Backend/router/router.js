@@ -25,19 +25,19 @@ import { postUpdatePwdController } from "../controllers/updatePassword.js";
 const router = express.Router();
 
 // sign up
-router.post("/api/signup", validateUser, validateSchema, postSignupController);
+router.post("/signup", validateUser, validateSchema, postSignupController);
 //log in
-router.post("/api/login", limiter, postLoginController);
-router.post("/api/logout", postLogoutController);
-router.put("/api/update-password", postUpdatePwdController);
-router.get("/api/userinfo/:userId", authintcatUser, getUserInfo);
-router.get("/api/users", getAllUsers);
-router.get("/api/user/:id", authintcatUser, getUserById);
+router.post("/login", limiter, postLoginController);
+router.post("/logout", postLogoutController);
+router.put("/update-password", postUpdatePwdController);
+router.get("/userinfo/:userId", authintcatUser, getUserInfo);
+router.get("/users", getAllUsers);
+router.get("/user/:id", authintcatUser, getUserById);
 
 //////
-router.post("/api/postitem/:id", postItem);
-router.put("/api/updateItemCategory/:userId/:itemId", updateItemCategory);
-router.put("/api/users/:id/items/:itemId", postUpdate);
-router.delete("/api/users/:id/items/:itemId", postDelete);
+router.post("/postitem/:id", postItem);
+router.put("/updateItemCategory/:userId/:itemId", updateItemCategory);
+router.put("/users/:id/items/:itemId", postUpdate);
+router.delete("/users/:id/items/:itemId", postDelete);
 
 export default router;

@@ -23,6 +23,9 @@ app.use(
   })
 );
 app.set("trust proxy", 1);
+app.get("/test", (req, res) => {
+  res.send("Hello World");
+});
 app.get("/", (req, res) => {
   res.send("Backend running");
 });
