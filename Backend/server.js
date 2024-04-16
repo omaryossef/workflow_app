@@ -15,11 +15,14 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
     credentials: true,
+    origin:
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:5173"
+        : "https://todomaster-frotend.onrender.com",
   })
 );
-
+app.set("trust proxy", 1);
 app.get("/", (req, res) => {
   res.send("Backend running");
 });

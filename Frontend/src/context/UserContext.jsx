@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import url from "../../config/config.js";
 import cookie from "js-cookie"; // cookie parser
 const UserContext = createContext();
 const UserContextProvider = ({ children }) => {
@@ -37,7 +38,7 @@ const UserContextProvider = ({ children }) => {
     };
     fetchData();
   }, [hasToken]);
-  const backendApiUrl = "http://localhost:3005/api";
+  const backendApiUrl = url;
   return (
     <UserContext.Provider
       value={{
