@@ -18,12 +18,29 @@ const TodoList = ({ user, onLogout }) => {
   }, []);
 
   const loadTodos = async () => {
-    try {
-      const response = await axios.get("http://localhost:3005/todos", {
-        withCredentials: true,
-      });
+    console.log("user in loadTdos", user);
 
-      setTodos(response.data.todos);
+    if (!user || !user._id) {
+      console.error("Kein Benutzer gefunden.");
+      return;
+    }
+    try {
+      const response = await axios.get(
+        `http://localhost:3005/alltodos/${user._id}`, // Ensure that user._id is defined
+        {
+          withCredentials: true, // Optional, depends on your backend config
+        }
+      );
+      console.log("new log");
+
+      // Check if the response contains todos
+      if (response.data && response.data.todos) {
+        setTodos(response.data.todos); // Set the state with the fetched todos
+      } else {
+        console.error(
+          "To-Do-Liste konnte nicht geladen werden: Keine Daten gefunden."
+        );
+      }
     } catch (error) {
       console.error("Fehler beim Laden der To-Do-Liste:", error.message);
     }
@@ -41,7 +58,7 @@ const TodoList = ({ user, onLogout }) => {
         }
       );
       // Nach dem Erstellen neu laden
-      loadTodos(response.data);
+      loadTodos();
       // Reset der Eingabefelder
       setNewTodo({
         brainstrom: "",

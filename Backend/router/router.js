@@ -22,6 +22,7 @@ import {
   updateItemCategory,
 } from "../controllers/itemsController.js";
 import { postUpdatePwdController } from "../controllers/updatePassword.js";
+import { getAllTodos } from "../controllers/getAllTodos.js";
 const router = express.Router();
 
 // sign up
@@ -33,6 +34,7 @@ router.put("/update-password", postUpdatePwdController);
 router.get("/userinfo/:userId", authintcatUser, getUserInfo);
 router.get("/users", getAllUsers);
 router.get("/user/:id", authintcatUser, getUserById);
+router.get("/alltodos/:id", getAllTodos);
 
 //////
 router.post("/postitem/:id", postItem);

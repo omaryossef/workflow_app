@@ -9,19 +9,54 @@ import DraggableItem from "./DraggableItem";
 import "../styles/workFlowCard.css";
 
 function WorkFlowCard({ titleName, image }) {
-  const { users, setUsers, hasToken, backendApiUrl, userId } =
+  const { user, setUser, users, setUsers, hasToken, backendApiUrl, userId } =
     useContext(UserContext);
   // console.log(userId);
+  const [todos, setTodos] = useState([]);
   const [items, setItems] = useState([]);
   const [klicked, setKlicked] = useState(false);
   const [text, setText] = useState("");
   const [itemId, setItemId] = useState(null);
-
+  console.log("user in", userId);
   const [, drop] = useDrop({
     accept: ItemTypes.ITEM,
     drop: (item) => handleDrop(item),
   });
+  useEffect(() => {
+    // Lade die To-Do-Liste beim Mounten der Komponente
+    loadTodos();
+  }, []);
 
+  const loadTodos = async () => {
+    console.log("userid in loadTdos", userId);
+    if (!userId) {
+      console.error("Kein Benutzer gefunden.");
+      return;
+    }
+
+    try {
+      const response = await axios.get(
+        `http://localhost:3005/alltodos/${userId}`, // Ensure that user._id is defined
+        {
+          withCredentials: true, // Optional, depends on your backend config
+        }
+      );
+      console.log("new log");
+
+      // Check if the response contains todos
+      if (response.data && response.data.todos) {
+        console.log("resonse", response.data);
+
+        setTodos(response.data.todos); // Set the state with the fetched todos
+      } else {
+        console.error(
+          "To-Do-Liste konnte nicht geladen werden: Keine Daten gefunden."
+        );
+      }
+    } catch (error) {
+      console.error("Fehler beim Laden der To-Do-Liste:", error.message);
+    }
+  };
   const handleDrop = async (item) => {
     try {
       const response = await axios.put(
@@ -29,7 +64,7 @@ function WorkFlowCard({ titleName, image }) {
         { category: titleName },
         { withCredentials: true }
       );
-
+      loadTodos();
       console.log("drag response: ", response.data);
       await getUserByIdHandler();
     } catch (error) {
@@ -48,6 +83,7 @@ function WorkFlowCard({ titleName, image }) {
       setText(currentItem ? currentItem.title : "");
       setKlicked(true);
       setItemId(itemId);
+      loadTodos();
     } catch (error) {
       console.log(error);
     }
@@ -60,7 +96,7 @@ function WorkFlowCard({ titleName, image }) {
         { withCredentials: true }
       );
       console.log("Server response after deleting item:", response.data);
-
+      loadTodos();
       // await getUserByIdHandler();
     } catch (error) {
       console.log(error);
@@ -102,7 +138,7 @@ function WorkFlowCard({ titleName, image }) {
           );
           console.log("Server response after adding item:", response.data);
         }
-
+        loadTodos();
         setText("");
         setKlicked(false);
         setItemId(null);
@@ -121,6 +157,7 @@ function WorkFlowCard({ titleName, image }) {
       }
     };
     fetchData();
+    loadTodos();
   }, [hasToken, userId]);
 
   return (
